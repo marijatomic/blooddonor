@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'birth_date', 'address', 'phone', 'blod_type', 'sex', 'type',
+        'name', 'email', 'password', 'birth_date', 'address', 'phone', 'blood_type', 'sex', 'type',
     ];
 
     /**
@@ -33,6 +33,13 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
     }
+
+    public function claim()
+    {
+
+        return $this->belongsToMany('App\Claim');
+    }
+
 
     public function records()
     {

@@ -43,3 +43,9 @@ foreach ($routes as $key => $value) {
     Route::get('/' . $key . '/delete/{id}', $value . '@destroy');
 }
 
+Route::get('index/claim/ucreate', 'ClaimController@userCreate')->name('claim_ucreate');
+Route::post('index/claim/ucreate', 'ClaimController@userStore');
+
+Route::get('/claims', 'ClaimControlle@index')->name('claims');
+Route::get('/claims/{id}','ClaimController@show')->where('id', '[0-9]+');
+

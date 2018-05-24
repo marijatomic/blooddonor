@@ -12,4 +12,10 @@ class Claim extends Model
     public function records(){
         return $this->hasMany('App\Record');
     }
+
+
+    public function user()
+    {
+        return $this->belongsTo('App\User','user_id');
+    }
 }
