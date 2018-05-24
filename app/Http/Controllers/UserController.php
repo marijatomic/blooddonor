@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Record;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -55,7 +57,10 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('user.show',['user'=>$user]);
+        $confirms = Record::where('user_id','=',Auth::user()->id)->where('confirm','=',1)->get();
+        $notconfirms=Record::where('user_id','=',Auth::user()->id)->where('confirm','=',0)->get();
+        $donates=Record::where('user_id','=',Auth::user()->id)->where('donor','=',1)->get();
+        return view('user.show',array('user'=>$user,'confirms'=>$confirms,'notconfirms'=>$notconfirms,'donates'=>$donates));
     }
 
     /**

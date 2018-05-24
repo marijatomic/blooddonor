@@ -23,7 +23,7 @@ class CreateClaimTable extends Migration
             $table->enum('patient_sex', array("muško","žensko"));
             $table->longText('description');
             $table->integer('user_id')->unsigned()->index()->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
             $table->timestamps();
         });
     }

@@ -18,9 +18,9 @@ class CreateConversationsTable extends Migration
             $table->string('title');
             $table->date('last_message_time');
             $table->integer('userRequest_id')->unsigned()->index()->nullable();
-            $table->foreign('userRequest_id')->references('user_id')->on('claims')->onDelete('set null');
+            $table->foreign('userRequest_id')->references('user_id')->on('users')->onDelete('set null');
             $table->integer('donor_id')->unsigned()->index()->nullable();
-            $table->foreign('donor_id')->references('user_id')->on('records')->onDelete('set null');
+            $table->foreign('donor_id')->references('user_id')->on('users')->onDelete('set null');
             $table->timestamps();
         });
     }

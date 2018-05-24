@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'birth_date', 'address', 'phone', 'blood_type', 'sex', 'type',
+        'name', 'email', 'password', 'birth_date', 'address', 'phone', 'blod_type', 'sex', 'type',
     ];
 
     /**
@@ -32,5 +32,10 @@ class User extends Authenticatable
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
+    }
+
+    public function records()
+    {
+        return $this->hasMany('App\Record')->orderBy('id', 'desc');
     }
 }

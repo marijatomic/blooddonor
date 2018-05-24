@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Claim;
+use App\Conversation;
 use App\Record;
 use Illuminate\Http\Request;
 
@@ -31,7 +33,7 @@ class RecordController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -39,38 +41,48 @@ class RecordController extends Controller
         $record = new Record();
         $record->fill($request->all());
         $record->save();
+
+        $claim = Claim::find($record->claim_id)->get();
+
+        $conversation = new Conversation();
+        $conversation->title = $claim->user_id . '&' . $record->user_id;
+        $conversation->userRequest_id = $claim->user_id;
+        $conversation->donor_id = $request->user_id;
         return redirect('/')->with('success', 'Zahtjev kreiran.');
+
+
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $record = Record::find($id);
-        return view('record.show',['record'=>$record]);
+        return view('record.show', ['record' => $record]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $record = Record::find($id);
-        return view('record.edit', ['record'=>$record]);
+        return view('record.edit', ['record' => $record]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -79,13 +91,13 @@ class RecordController extends Controller
         $record->fill($request->all());
         $record->save();
 
-        return redirect('/')->with('success','Ažurirano.');
+        return redirect('/')->with('success', 'Ažurirano.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -18,7 +18,7 @@ class CreateRecordsTable extends Migration
             $table->boolean('confirm');
             $table->boolean('donor')->default(false);
             $table->integer('user_id')->unsigned()->index()->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
             $table->integer('request_id')->unsigned()->index()->nullable();
             $table->foreign('request_id')->references('id')->on('claims')->onDelete('set null');
             $table->timestamps();
