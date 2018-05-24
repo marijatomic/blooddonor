@@ -122,10 +122,32 @@
                        aria-controls="v-pills-messages" aria-selected="false"><span>03</span> Potvrdili</a>
                     <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
                        aria-controls="v-pills-settings" aria-selected="false"><span>04</span> Odbili</a>
-                    <a class="btn btn-default"> Potvrdi</a>
-                    <a class="btn btn-default"> Odbij</a>
-
+                    @if($claim->user_id != Auth::user()->id)
+                    <form class="form-horizontal col-lg-6"
+                          action="{{route('confirm')}}/{{$claim->id}}"
+                          method="POST">
+                        {{csrf_field()}}
+                        <fieldset>
+                            <button type="submit" class="btn btn-default"
+                                    style="width: 120px;">
+                                Potvrdi
+                            </button>
+                        </fieldset>
+                    </form>
+                    <form class="form-horizontal col-lg-6"
+                          action="{{route('reject')}}/{{$claim->id}}"
+                          method="POST">
+                        {{csrf_field()}}
+                        <fieldset>
+                            <button type="submit" class="btn btn-default"
+                                    style="width: 120px;">
+                                Odbij
+                            </button>
+                        </fieldset>
+                    </form>
+                    @endif
                 </div>
+
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-7 element-animate" data-animate-effect="fadeInLeft">
@@ -247,10 +269,10 @@
                 <h3>Location &amp; Contact</h3>
                 <p class="mb-5">134 Street Name, City Name Here, United States</p>
 
-                <h4 class="text-uppercase mb-3 h6 text-white">Email</h5>
+                <h5 class="text-uppercase mb-3 h6 text-white">Email</h5>
                     <p class="mb-5"><a href="mailto:info@yourdomain.com">info@yourdomain.com</a></p>
 
-                    <h4 class="text-uppercase mb-3 h6 text-white">Phone</h5>
+                    <h5 class="text-uppercase mb-3 h6 text-white">Phone</h5>
                         <p>+1 24 435 3533</p>
 
             </div>

@@ -49,3 +49,9 @@ Route::post('index/claim/ucreate', 'ClaimController@userStore');
 Route::get('/claims', 'ClaimControlle@index')->name('claims');
 Route::get('/claims/{id}','ClaimController@show')->where('id', '[0-9]+');
 
+Route::get('/confirm')->name('confirm');
+Route::post('/confirm/{id}', 'ClaimController@confirmClaim');
+
+Route::get('/reject')->name('reject');
+Route::post('/reject/{id}', 'ClaimController@rejectClaim');
+

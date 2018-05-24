@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Claim;
+use App\Conversation;
 use App\Record;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 
 class ClaimController extends Controller
@@ -119,6 +121,37 @@ class ClaimController extends Controller
 
         return redirect('/')->with('success', 'Kreirano');
 
+    }
+
+    public function confirmClaim($id){
+        $record = new Record();
+        $record->confirm=1;
+        $record->donor=0;
+        $record->user_id=Auth::user()->id;
+        $record->request_id=$id;
+        $record->save();
+
+        $claim=Claim::find($id);
+        $conversation=new Conversation();
+        $conversation->title=$claim->user->name . '+' . Auth::user()->name;
+        $conversation->last_message_time=Carbon::now();
+        $conversation->userRequest_id=$claim->user->id;
+        $conversation->donor_id=Auth::user()->id;
+        $conversation->save();
+
+        return redirect()->back()->with('success', 'Potvrdili ste zahtjev.');
+    }
+
+    public function rejectClaim($id){
+        $record = new Record();
+        $record->confirm=0;
+        $record->donor=0;
+        $record->user_id=Auth::user()->id;
+        $record->request_id=$id;
+        $record->save();
+
+
+        return redirect()->back()->with('success', 'Odbili ste zahtjev.');
     }
 
 
