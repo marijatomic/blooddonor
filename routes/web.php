@@ -55,3 +55,10 @@ Route::post('/confirm/{id}', 'ClaimController@confirmClaim');
 Route::get('/reject')->name('reject');
 Route::post('/reject/{id}', 'ClaimController@rejectClaim');
 
+Route::get('/searchUsers', 'UserController@searchUsers')->name('search_user');
+
+
+//Chat
+Route::get('/chat','ChatController@index');
+Route::get('/chat/conversations', 'ChatController@getConversations')->name('conversations1'); //vraća sve razgovore prijavljenog korisnika
+
