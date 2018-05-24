@@ -103,4 +103,9 @@ class UserController extends Controller
         $user->delete();
         return redirect('/')->with('danger', 'Korisnik izbrisan.');
     }
+
+    public function searchUsers()
+    {
+        return User::orderBy('name', 'asc')->get();
+    }
 }

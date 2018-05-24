@@ -23,3 +23,10 @@ Route::get('/index','LandPage1Controller@index');
 Route::get('/index1','LandPage2Controller@index');
 Route::get('/index2','LandPage3Controller@index');
 
+Route::get('/searchUsers', 'UserController@searchUsers')->name('search_user');
+
+
+//Chat
+Route::get('/chat','ChatController@index');
+Route::get('/chat/conversations', 'ChatController@getConversations')->name('conversations1'); //vraća sve razgovore prijavljenog korisnika
+

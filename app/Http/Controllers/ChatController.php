@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Claim;
+use App\Conversation;
+use App\Message;
+use App\Record;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
 {
@@ -13,7 +18,7 @@ class ChatController extends Controller
      */
     public function index()
     {
-        //
+        return view('Chat.index');
     }
 
     /**
@@ -80,5 +85,32 @@ class ChatController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    //vraća sve razgovore prijavljenog korisnika
+    public function getConversations()
+    {
+        /*$records=Record::where('user_id','=',Auth::user()->id)->first();
+        $claims=Claim::where('user_id','=',Auth::user()->id)->first();*/
+        $conversations=Conversation::where('userRequest_id','=',Auth::user()->id)->orWhere('donor_id','=',Auth::user()->id)->get();
+
+
+        foreach ($conversations as $conversation) {
+
+            $message = Message::where('conversation_id','=',$conversation->id)->orderBy('id','desc')->first();
+//            $users = [];
+
+//            foreach ($participants as $participant) {
+//                array_push($users, User::find($participant->user_id));
+//            }
+
+//            $conversation->participants = $users;
+            $conversation->message = $message;
+        }
+        return $conversations;
+    }
+
+    public  function getMessages(){
+
     }
 }
