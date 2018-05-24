@@ -123,13 +123,7 @@
                     <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
                        aria-controls="v-pills-settings" aria-selected="false"><span>04</span> Odbili</a>
                     @if($claim->user_id != Auth::user()->id)
-                        @foreach($records as $record)
-                            {{$x=false}}
-                            @if($record->user_id == Auth::user()->id)
-                                {{$x=true}}
-                            @endif
-                        @endforeach
-                        @if($x==false)
+                        @if($recordConfirm==false)
                             <form class="form-horizontal col-lg-6"
                                   action="{{route('confirm')}}/{{$claim->id}}"
                                   method="POST">

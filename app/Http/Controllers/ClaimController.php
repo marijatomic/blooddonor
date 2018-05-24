@@ -60,7 +60,13 @@ class ClaimController extends Controller
         $claim = Claim::find($id);
 
         $records = Record::where('request_id','=',$claim->id)->get();
-        return view('claim.show',['claim'=>$claim],['records'=>$records]);
+        $recordConfirm=false;
+        foreach($records as $record){
+            if($record->user_id == Auth::user()->id){
+                $recordConfirm=true;
+            }
+        }
+        return view('claim.show',array('claim'=>$claim,'records'=>$records,'recordConfirm'=>$recordConfirm));
     }
 
     /**
