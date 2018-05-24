@@ -81,7 +81,7 @@ class ClaimController extends Controller
         $claim->fill($request->all());
         $claim->save();
 
-        return redirect('/')->with('success','Ažurirano.');
+        return redirect('/')->with('success','Ažurirano!');
     }
 
     /**
