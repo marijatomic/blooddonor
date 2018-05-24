@@ -33,4 +33,17 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
     }
+
+    public function claim()
+    {
+
+        return $this->belongsToMany('App\Claim');
+    }
+
+    public function records()
+    {
+
+        return $this->hasMany('App\Record');
+    }
+
 }

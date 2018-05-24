@@ -36,15 +36,17 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-7 text-right">
                     <p class="mb-0">
-                        <a href="#" class="cta-btn" data-toggle="modal" data-target="#modalAppointment">Make an Appointment</a></p>
+                        <a href="#" class="cta-btn" data-toggle="modal" data-target="#modalAppointment">Zahtjev za
+                            donore</a></p>
                 </div>
             </div>
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{{url('/index')}}">Medi<span>+</span>  </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="{{url('/index')}}">Medi<span>+</span> </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05"
+                    aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -54,7 +56,8 @@
                         <a class="nav-link active" href="{{url('/index')}}">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+                        <a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Services</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <a class="dropdown-item" href="#">Institute</a>
                             <a class="dropdown-item" href="#">Departments</a>
@@ -63,7 +66,8 @@
 
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="doctors.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Doctors</a>
+                        <a class="nav-link dropdown-toggle" href="doctors.html" id="dropdown05" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Doctors</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown05">
                             <a class="dropdown-item" href="doctors.html">Find Doctors</a>
                             <a class="dropdown-item" href="#">Practitioner</a>
@@ -78,6 +82,46 @@
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
+                    @guest
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Prijava') }}</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link"
+                                                href="{{ route('register') }}">{{ __('Registracija') }}</a></li>
+                        @else
+                            <li class="dropdown nav-item">
+                                <a href="#" class="dropdown-toggle nav-link " data-toggle="dropdown" role="button"
+                                   aria-expanded="false" aria-haspopup="true">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu row nav-item" style="width:350px;">
+                                    <ol class="col-md-12">
+                                        <div class="col-sm-12" style="padding: 0px !important;">
+
+
+                                            <div class="col-md-6"
+                                                 style="padding: 0px !important;">
+                                                <a href="{{ route('logout') }}"
+                                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"
+                                                   class="btn btn-default btn-block btn-lg"
+                                                ><i
+                                                            class="fa fa-power-off"></i>
+                                                    Odjavi se
+                                                </a>
+
+                                                <form id="logout-form" action="{{ route('logout') }}"
+                                                      method="POST"
+                                                      style="display: none;">
+                                                    {{ csrf_field() }}
+                                                </form>
+                                            </div>
+
+
+                                        </div>
+                                    </ol>
+                                </ul>
+                            </li>
+                            @endguest
                 </ul>
             </div>
         </div>
@@ -92,7 +136,8 @@
             <div class="row slider-text align-items-center">
                 <div class="col-md-7 col-sm-12 element-animate">
                     <h1>We Care For You</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus,
+                        soluta sit quam minima expedita atque corrupti reiciendis.</p>
                 </div>
             </div>
         </div>
@@ -104,7 +149,8 @@
             <div class="row slider-text align-items-center">
                 <div class="col-md-7 col-sm-12 element-animate">
                     <h1>We Provide Health Care Solutions</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus,
+                        soluta sit quam minima expedita atque corrupti reiciendis.</p>
                 </div>
             </div>
         </div>
@@ -121,7 +167,8 @@
             <div class="col-inner p-xl-5 p-lg-5 p-md-4 p-sm-4 p-4">
                 <span class="icon flaticon-hospital-bed"></span>
                 <h2>Patient Services</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus,
+                    soluta sit quam minima expedita atque corrupti reiciendis.</p>
             </div>
             <a href="#" class="btn-more">Read More</a>
         </div>
@@ -129,7 +176,8 @@
             <div class="col-inner p-xl-5 p-lg-5 p-md-4 p-sm-4 p-4">
                 <span class="icon flaticon-first-aid-kit"></span>
                 <h2>Medical Services</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus,
+                    soluta sit quam minima expedita atque corrupti reiciendis.</p>
             </div>
             <a href="#" class="btn-more">Read More</a>
         </div>
@@ -137,7 +185,8 @@
             <div class="col-inner p-xl-5 p-lg-5 p-md-4 p-sm-4 p-4">
                 <span class="icon flaticon-hospital"></span>
                 <h2>Amenities</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus,
+                    soluta sit quam minima expedita atque corrupti reiciendis.</p>
             </div>
             <a href="#" class="btn-more">Read More</a>
         </div>
@@ -150,7 +199,8 @@
         <div class="row justify-content-center mb-5 element-animate">
             <div class="col-md-8 text-center mb-5">
                 <h2 class="text-uppercase heading border-bottom mb-4">Why Choose Us</h2>
-                <p class="mb-0 lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+                <p class="mb-0 lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit,
+                    necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
             </div>
         </div>
         <div class="row align-items-center">
@@ -212,42 +262,62 @@
 
             <div class="col-md-4 border-right element-animate">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><span>01</span> Amenities</a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><span>02</span> Medical Services</a>
-                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><span>03</span> Patient Services</a>
-                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false"><span>04</span> Expert Doctors</a>
+                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+                       aria-controls="v-pills-home" aria-selected="true"><span>01</span> Amenities</a>
+                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+                       aria-controls="v-pills-profile" aria-selected="false"><span>02</span> Medical Services</a>
+                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
+                       aria-controls="v-pills-messages" aria-selected="false"><span>03</span> Patient Services</a>
+                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
+                       aria-controls="v-pills-settings" aria-selected="false"><span>04</span> Expert Doctors</a>
                 </div>
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-7 element-animate">
 
                 <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                         aria-labelledby="v-pills-home-tab">
                         <span class="icon flaticon-hospital"></span>
                         <h2 class="text-primary">Amenities</h2>
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate, quibusdam sunt iste dolores consequatur</p>
-                        <p>Inventore fugit error iure nisi reiciendis fugiat illo pariatur quam sequi quod iusto facilis officiis nobis sit quis molestias asperiores rem, blanditiis! Commodi exercitationem vitae deserunt qui nihil ea, tempore et quam natus quaerat doloremque.</p>
+                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate,
+                            quibusdam sunt iste dolores consequatur</p>
+                        <p>Inventore fugit error iure nisi reiciendis fugiat illo pariatur quam sequi quod iusto facilis
+                            officiis nobis sit quis molestias asperiores rem, blanditiis! Commodi exercitationem vitae
+                            deserunt qui nihil ea, tempore et quam natus quaerat doloremque.</p>
                         <p><a href="#" class="btn btn-primary">Learn More</a></p>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                         aria-labelledby="v-pills-profile-tab">
                         <span class="icon flaticon-first-aid-kit"></span>
                         <h2 class="text-primary">Medical Services</h2>
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate, quibusdam sunt iste dolores consequatur</p>
-                        <p>Inventore fugit error iure nisi reiciendis fugiat illo pariatur quam sequi quod iusto facilis officiis nobis sit quis molestias asperiores rem, blanditiis! Commodi exercitationem vitae deserunt qui nihil ea, tempore et quam natus quaerat doloremque.</p>
+                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate,
+                            quibusdam sunt iste dolores consequatur</p>
+                        <p>Inventore fugit error iure nisi reiciendis fugiat illo pariatur quam sequi quod iusto facilis
+                            officiis nobis sit quis molestias asperiores rem, blanditiis! Commodi exercitationem vitae
+                            deserunt qui nihil ea, tempore et quam natus quaerat doloremque.</p>
                         <p><a href="#" class="btn btn-primary">Learn More</a></p>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
+                         aria-labelledby="v-pills-messages-tab">
                         <span class="icon flaticon-hospital-bed"></span>
                         <h2 class="text-primary">Patient Services</h2>
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate, quibusdam sunt iste dolores consequatur</p>
-                        <p>Inventore fugit error iure nisi reiciendis fugiat illo pariatur quam sequi quod iusto facilis officiis nobis sit quis molestias asperiores rem, blanditiis! Commodi exercitationem vitae deserunt qui nihil ea, tempore et quam natus quaerat doloremque.</p>
+                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate,
+                            quibusdam sunt iste dolores consequatur</p>
+                        <p>Inventore fugit error iure nisi reiciendis fugiat illo pariatur quam sequi quod iusto facilis
+                            officiis nobis sit quis molestias asperiores rem, blanditiis! Commodi exercitationem vitae
+                            deserunt qui nihil ea, tempore et quam natus quaerat doloremque.</p>
                         <p><a href="#" class="btn btn-primary">Learn More</a></p>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
+                         aria-labelledby="v-pills-settings-tab">
                         <span class="icon flaticon-doctor"></span>
                         <h2 class="text-primary">Expert Doctors</h2>
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate, quibusdam sunt iste dolores consequatur</p>
-                        <p>Inventore fugit error iure nisi reiciendis fugiat illo pariatur quam sequi quod iusto facilis officiis nobis sit quis molestias asperiores rem, blanditiis! Commodi exercitationem vitae deserunt qui nihil ea, tempore et quam natus quaerat doloremque.</p>
+                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate,
+                            quibusdam sunt iste dolores consequatur</p>
+                        <p>Inventore fugit error iure nisi reiciendis fugiat illo pariatur quam sequi quod iusto facilis
+                            officiis nobis sit quis molestias asperiores rem, blanditiis! Commodi exercitationem vitae
+                            deserunt qui nihil ea, tempore et quam natus quaerat doloremque.</p>
                         <p><a href="#" class="btn btn-primary">Learn More</a></p>
                     </div>
                 </div>
@@ -262,7 +332,8 @@
         <div class="row justify-content-center mb-5 element-animate">
             <div class="col-md-8 text-center mb-5">
                 <h2 class="text-uppercase heading border-bottom mb-4">Our Doctors</h2>
-                <p class="mb-0 lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+                <p class="mb-0 lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit,
+                    necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
             </div>
         </div>
         <div class="row element-animate">
@@ -393,7 +464,8 @@
         <div class="row text-center justify-content-center">
             <div class="col-md-10">
                 <h2 class="heading element-animate">Experience Our Advance Facilities</h2>
-                <p class="sub-heading element-animate mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+                <p class="sub-heading element-animate mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
                 <p class="element-animate"><a href="#" class="btn btn-primary btn-lg">Get In Touch</a></p>
             </div>
         </div>
@@ -406,124 +478,39 @@
         <div class="row justify-content-center mb-5 element-animate">
             <div class="col-md-8 text-center mb-5">
                 <h2 class="text-uppercase heading border-bottom mb-4">News &amp; Events</h2>
-                <p class="mb-0 lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+                <p class="mb-0 lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit,
+                    necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
             </div>
         </div>
         <div class="row element-animate">
             <div class="major-caousel js-carousel-2 owl-carousel">
-                <div>
-                    <div class="media d-block media-custom text-left">
-                        <img src="{{asset('assets1/img/img_thumb1.jpg')}}" alt="Image Placeholder" class="img-fluid">
-                        <div class="media-body">
-                            <span class="meta-post">December 2, 2017</span>
-                            <h3 class="mt-0 text-black"><a href="#" class="text-black">Lorem ipsum dolor sit amet elit</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <p class="clearfix">
-                                <a href="#" class="float-left">Read more</a>
-                                <a href="#" class="float-right meta-chat"><span class="ion-chatbubble"></span> 8</a>
-                            </p>
+                @if($claims)
+                    @foreach($claims as $claim)
+                        <div>
+                            <div class="media d-block media-custom text-left">
+                                <img src="{{asset('assets1/img/img_thumb1.jpg')}}" alt="Image Placeholder"
+                                     class="img-fluid">
+                                <div class="media-body">
+                                    <span class="meta-post">{{$claim->created_at}}</span>
+                                    <h3 class="mt-0 text-black"><a href="#" class="text-black">
+                                          {{$claim->patient_name}}</a></h3>
+                                    <p>{{$claim->patient_birth}}</p>
+                                    <p>{{$claim->patient_address}}</p>
+                                    <p>{{$claim->patient_phone}}</p>
+                                    <p>{{$claim->patient_blood}}</p>
+                                    <p>{{$claim->patient_sex}}</p>
+                                    <p>{{$claim->description}}</p>
+                                    <p>{{$claim->user_id}}</p>
+                                    <p class="clearfix">
+                                        <a href="{{route('claims')}}/{{$claim->id}}" class="float-left">Read more</a>
+                                        <a href="#" class="float-right meta-chat"><span class="ion-chatbubble"></span> 8</a>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="media d-block media-custom text-left">
-                        <img src="{{asset('assets1/img/img_thumb2.jpg')}}" alt="Image Placeholder" class="img-fluid">
-                        <div class="media-body">
-                            <span class="meta-post">December 2, 2017</span>
-                            <h3 class="mt-0 text-black"><a href="#" class="text-black">Lorem ipsum dolor sit amet elit</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <p class="clearfix">
-                                <a href="#" class="float-left">Read more</a>
-                                <a href="#" class="float-right meta-chat"><span class="ion-chatbubble"></span> 2</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="media d-block media-custom text-left">
-                        <img src="{{asset('assets1/img/img_thumb3.jpg')}}" alt="Image Placeholder" class="img-fluid">
-                        <div class="media-body">
-                            <span class="meta-post">December 2, 2017</span>
-                            <h3 class="mt-0 text-black"><a href="#" class="text-black">Lorem ipsum dolor sit amet elit</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <p class="clearfix">
-                                <a href="#" class="float-left">Read more</a>
-                                <a href="#" class="float-right meta-chat"><span class="ion-chatbubble"></span> 5</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="media d-block media-custom text-left">
-                        <img src="{{asset('assets1/img/img_thumb4.jpg')}}" alt="Image Placeholder" class="img-fluid">
-                        <div class="media-body">
-                            <span class="meta-post">December 2, 2017</span>
-                            <h3 class="mt-0 text-black"><a href="#" class="text-black">Lorem ipsum dolor sit amet elit</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <p class="clearfix">
-                                <a href="#" class="float-left">Read more</a>
-                                <a href="#" class="float-right meta-chat"><span class="ion-chatbubble"></span> 7</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
 
-                <div>
-                    <div class="media d-block media-custom text-left">
-                        <img src="{{asset('assets1/img/img_thumb1.jpg')}}" alt="Image Placeholder" class="img-fluid">
-                        <div class="media-body">
-                            <span class="meta-post">December 2, 2017</span>
-                            <h3 class="mt-0 text-black"><a href="#" class="text-black">Lorem ipsum dolor sit amet elit</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <p class="clearfix">
-                                <a href="#" class="float-left">Read more</a>
-                                <a href="#" class="float-right meta-chat"><span class="ion-chatbubble"></span> 1</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="media d-block media-custom text-left">
-                        <img src="{{asset('assets1/img/img_thumb2.jpg')}}" alt="Image Placeholder" class="img-fluid">
-                        <div class="media-body">
-                            <span class="meta-post">December 2, 2017</span>
-                            <h3 class="mt-0 text-black"><a href="#" class="text-black">Lorem ipsum dolor sit amet elit</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <p class="clearfix">
-                                <a href="#" class="float-left">Read more</a>
-                                <a href="#" class="float-right meta-chat"><span class="ion-chatbubble"></span> 4</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="media d-block media-custom text-left">
-                        <img src="{{asset('assets1/img/img_thumb1.jpg')}}" alt="Image Placeholder" class="img-fluid">
-                        <div class="media-body">
-                            <span class="meta-post">December 2, 2017</span>
-                            <h3 class="mt-0 text-black"><a href="#" class="text-black">Lorem ipsum dolor sit amet elit</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <p class="clearfix">
-                                <a href="#" class="float-left">Read more</a>
-                                <a href="#" class="float-right meta-chat"><span class="ion-chatbubble"></span> 12</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="media d-block media-custom text-left">
-                        <img src="{{asset('assets1/img/img_thumb1.jpg')}}" alt="Image Placeholder" class="img-fluid">
-                        <div class="media-body">
-                            <span class="meta-post">December 2, 2017</span>
-                            <h3 class="mt-0 text-black"><a href="#" class="text-black">Lorem ipsum dolor sit amet elit</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <p class="clearfix">
-                                <a href="#" class="float-left">Read more</a>
-                                <a href="#" class="float-right meta-chat"><span class="ion-chatbubble"></span> 14</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
 
             </div>
             <!-- END slider -->
@@ -532,7 +519,8 @@
 </section>
 <!-- END section -->
 
-<a href="#" class="cta-link element-animate" data-animate-effect="fadeIn" data-toggle="modal" data-target="#modalAppointment">
+<a href="#" class="cta-link element-animate" data-animate-effect="fadeIn" data-toggle="modal"
+   data-target="#modalAppointment">
     <span class="sub-heading">Ready to Visit?</span>
     <span class="heading">Make an Appointment</span>
 </a>
@@ -574,10 +562,10 @@
                 <p class="mb-5">134 Street Name, City Name Here, United States</p>
 
                 <h4 class="text-uppercase mb-3 h6 text-white">Email</h4>
-                    <p class="mb-5"><a href="mailto:info@yourdomain.com">info@yourdomain.com</a></p>
+                <p class="mb-5"><a href="mailto:info@yourdomain.com">info@yourdomain.com</a></p>
 
-                    <h4 class="text-uppercase mb-3 h6 text-white">Phone</h4>
-                        <p>+1 24 435 3533</p>
+                <h4 class="text-uppercase mb-3 h6 text-white">Phone</h4>
+                <p>+1 24 435 3533</p>
 
             </div>
         </div>
@@ -587,7 +575,8 @@
                 <hr class="border-t">
             </div>
             <div class="col-md-6 col-sm-12 copyright">
-                <p>&copy; 2018 Colorlib Medi+. Designed &amp; Developed by <a href="https://colorlib.com/">Colorlib</a></p>
+                <p>&copy; 2018 Colorlib Medi+. Designed &amp; Developed by <a href="https://colorlib.com/">Colorlib</a>
+                </p>
             </div>
             <div class="col-md-6 col-sm-12 text-md-right text-sm-left">
                 <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
@@ -601,47 +590,86 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="modalAppointment" tabindex="-1" role="dialog" aria-labelledby="modalAppointmentLabel" aria-hidden="true">
+<div class="modal fade" id="modalAppointment" tabindex="-1" role="dialog" aria-labelledby="modalAppointmentLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalAppointmentLabel">Appointment</h5>
+                <h5 class="modal-title" id="modalAppointmentLabel">Zahtjev</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#">
+                <form method="POST" action="{{ route('claim_ucreate') }}">
+                    @csrf
                     <div class="form-group">
-                        <label for="appointment_name" class="text-black">Full Name</label>
-                        <input type="text" class="form-control" id="appointment_name">
+                        <label for="appointment_name" class="text-black">Ime i prezime </label>
+                        <input type="text" class="form-control" id="appointment_name" name="patient_name"
+                               placeholder="Ime i prezime">
                     </div>
                     <div class="form-group">
-                        <label for="appointment_email" class="text-black">Email</label>
-                        <input type="text" class="form-control" id="appointment_email">
+                        <label for="appointment_name" class="text-black">Adresa pacijenta </label>
+                        <input type="text" class="form-control" id="appointment_name" name="patient_address"
+                               placeholder="Adresa">
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="appointment_date" class="text-black">Date</label>
-                                <input type="text" class="form-control" id="appointment_date">
+                                <label for="appointment_date" class="text-black">Broj telefona</label>
+                                <input type="text" class="form-control" id="appointment_name" name="patient_phone"
+                                       placeholder="Broj telefona">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="appointment_time" class="text-black">Time</label>
-                                <input type="text" class="form-control" id="appointment_time">
+                                <label for="appointment_date" class="text-black">Datum rođenja</label>
+                                <input type="text" class="form-control" id="appointment_date" name="patient_birth"
+                                       placeholder="Datum rođenja">
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="appointment_date" class="text-black">Krvna grupa</label>
+                                <select id="inlineFormCustomSelect" name="patient_blood">
+                                    <option selected>Odaberi</option>
+                                    <option value="A+">A+</option>
+                                    <option value="B+">B+</option>
+                                    <option value="0+">0+</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B-">B-</option>
+                                    <option value="0-">0-</option>
+                                    <option value="AB-">AB-</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="appointment_date" class="text-black">Spol</label>
+                                <select id="inlineFormCustomSelect" name="patient_sex">
+                                    <option selected>Odaberi</option>
+                                    <option value="musko">Muško</option>
+                                    <option value="zensko">Žensko</option>
+
+                                </select>
                             </div>
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        <label for="appointment_message" class="text-black">Message</label>
-                        <textarea name="" id="appointment_message" class="form-control" cols="30" rows="10"></textarea>
+                        <label for="appointment_message" class="text-black">Opis</label>
+                        <textarea name="description" id="appointment_message" class="form-control" cols="30" rows="10"
+                                  placeholder="Opis"></textarea>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Send Message" class="btn btn-primary">
+                        <input type="submit" value="Pošalji zahtjev" class="btn btn-danger">
                     </div>
                 </form>
             </div>
@@ -658,5 +686,10 @@
 <script src="{{asset('assets1/js/jquery.timepicker.min.js')}}"></script>
 <script src="{{asset('assets1/js/jquery.waypoints.min.js')}}"></script>
 <script src="{{asset('assets1/js/main.js')}}"></script>
+<script>
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+    });
+</script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Claim;
 use Illuminate\Http\Request;
 
 class LandPage1Controller extends Controller
@@ -13,8 +14,14 @@ class LandPage1Controller extends Controller
      */
     public function index()
     {
-        return view('home1.index');
+
+
+        $claims = Claim::orderBy('id', 'desc')->get();
+        return view('home1.index', ['claims' => $claims]);
+
+
     }
+
 
     /**
      * Show the form for creating a new resource.

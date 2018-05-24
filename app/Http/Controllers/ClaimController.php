@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Claim;
+use App\Record;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class ClaimController extends Controller
@@ -53,7 +56,9 @@ class ClaimController extends Controller
     public function show($id)
     {
         $claim = Claim::find($id);
-        return view('claim.show',['claim'=>$claim]);
+
+        $records = Record::where('request_id','=',$claim->id)->get();
+        return view('claim.show',['claim'=>$claim],['records'=>$records]);
     }
 
     /**
@@ -96,4 +101,25 @@ class ClaimController extends Controller
         $claim->delete();
         return redirect('/')->with('danger', 'Izbrisano.');
     }
+    public function userCreate()
+    {
+        $users = User::all();
+
+        return view('home1.index', ['users' => $users]);
+    }
+
+    public function userStore(Request $request)
+
+
+    {
+        $claim = new Claim();
+        $claim->fill($request->except(['user_id']));
+        $claim->user_id= Auth::user()->id;
+        $claim->save();
+
+        return redirect('/')->with('success', 'Kreirano');
+
+    }
+
+
 }
