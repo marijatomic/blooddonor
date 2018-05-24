@@ -123,28 +123,36 @@
                     <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
                        aria-controls="v-pills-settings" aria-selected="false"><span>04</span> Odbili</a>
                     @if($claim->user_id != Auth::user()->id)
-                    <form class="form-horizontal col-lg-6"
-                          action="{{route('confirm')}}/{{$claim->id}}"
-                          method="POST">
-                        {{csrf_field()}}
-                        <fieldset>
-                            <button type="submit" class="btn btn-default"
-                                    style="width: 120px;">
-                                Potvrdi
-                            </button>
-                        </fieldset>
-                    </form>
-                    <form class="form-horizontal col-lg-6"
-                          action="{{route('reject')}}/{{$claim->id}}"
-                          method="POST">
-                        {{csrf_field()}}
-                        <fieldset>
-                            <button type="submit" class="btn btn-default"
-                                    style="width: 120px;">
-                                Odbij
-                            </button>
-                        </fieldset>
-                    </form>
+                        @foreach($records as $record)
+                            {{$x=false}}
+                            @if($record->user_id == Auth::user()->id)
+                                {{$x=true}}
+                            @endif
+                        @endforeach
+                        @if($x==false)
+                            <form class="form-horizontal col-lg-6"
+                                  action="{{route('confirm')}}/{{$claim->id}}"
+                                  method="POST">
+                                {{csrf_field()}}
+                                <fieldset>
+                                    <button type="submit" class="btn btn-default"
+                                            style="width: 120px;">
+                                        Potvrdi
+                                    </button>
+                                </fieldset>
+                            </form>
+                            <form class="form-horizontal col-lg-6"
+                                  action="{{route('reject')}}/{{$claim->id}}"
+                                  method="POST">
+                                {{csrf_field()}}
+                                <fieldset>
+                                    <button type="submit" class="btn btn-default"
+                                            style="width: 120px;">
+                                        Odbij
+                                    </button>
+                                </fieldset>
+                            </form>
+                        @endif
                     @endif
                 </div>
 
@@ -186,7 +194,7 @@
 
                         <div class="list-group">
 
-                                @foreach($records as $record)
+                            @foreach($records as $record)
                                 @if($record->confirm == 1)
                                     <a href="#"
                                        class="list-group-item list-group-item-action flex-column align-items-start ">
@@ -195,7 +203,7 @@
                                         </div>
                                     </a>
                                 @endif
-                                @endforeach
+                            @endforeach
 
                         </div>
 
@@ -270,10 +278,10 @@
                 <p class="mb-5">134 Street Name, City Name Here, United States</p>
 
                 <h5 class="text-uppercase mb-3 h6 text-white">Email</h5>
-                    <p class="mb-5"><a href="mailto:info@yourdomain.com">info@yourdomain.com</a></p>
+                <p class="mb-5"><a href="mailto:info@yourdomain.com">info@yourdomain.com</a></p>
 
-                    <h5 class="text-uppercase mb-3 h6 text-white">Phone</h5>
-                        <p>+1 24 435 3533</p>
+                <h5 class="text-uppercase mb-3 h6 text-white">Phone</h5>
+                <p>+1 24 435 3533</p>
 
             </div>
         </div>

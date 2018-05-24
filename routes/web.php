@@ -61,4 +61,4 @@ Route::get('/searchUsers', 'UserController@searchUsers')->name('search_user');
 //Chat
 Route::get('/chat','ChatController@index');
 Route::get('/chat/conversations', 'ChatController@getConversations')->name('conversations1'); //vraća sve razgovore prijavljenog korisnika
-
+Route::get('/chat/messages/{conversation_id}', 'ChatController@getMessages')->name('messages');

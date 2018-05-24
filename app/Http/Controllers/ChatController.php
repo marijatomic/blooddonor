@@ -110,7 +110,7 @@ class ChatController extends Controller
         return $conversations;
     }
 
-    public  function getMessages(){
-
+    public  function getMessages($conversation_id){
+        return Message::where('conversation_id', '=', $conversation_id)->get();
     }
 }
