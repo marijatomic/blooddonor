@@ -63,3 +63,13 @@ Route::get('/chat','ChatController@index');
 Route::get('/chat/conversations', 'ChatController@getConversations')->name('conversations1'); //vraća sve razgovore prijavljenog korisnika
 Route::get('/chat/messages/{conversation_id}', 'ChatController@getMessages')->name('messages');
 Route::post('/chat/messages', 'ChatController@createMessage')->name('create_message');
+
+//Ruta za nepročitane notifikacije
+Route::get('/markAsRead', function () {
+
+    auth()->user()->unreadNotifications->markAsRead();
+
+    return redirect()->back();
+
+})->name('markRead');
+

@@ -20,6 +20,8 @@
 
     <!-- Theme Style -->
     <link rel="stylesheet" href="{{asset('assets1/css/style.css')}}">
+
+
 </head>
 <body>
 
@@ -36,8 +38,7 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-7 text-right">
                     <p class="mb-0">
-                        <a href="#" class="cta-btn" data-toggle="modal" data-target="#modalAppointment">Zahtjev za
-                            donore</a></p>
+                        <a href="#" class="cta-btn" data-toggle="modal" data-target="#modalAppointment">ZAHTJEV</a></p>
                 </div>
             </div>
         </div>
@@ -56,31 +57,60 @@
                         <a class="nav-link active" href="{{url('/index')}}">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">Services</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <a class="dropdown-item" href="#">Institute</a>
                             <a class="dropdown-item" href="#">Departments</a>
-                            <a class="dropdown-item" href="services.html">Services</a>
+                            <a class="dropdown-item" href="#">Services</a>
                         </div>
 
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="doctors.html" id="dropdown05" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">Doctors</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown05">
-                            <a class="dropdown-item" href="doctors.html">Find Doctors</a>
+                            <a class="dropdown-item" href="#">Find Doctors</a>
                             <a class="dropdown-item" href="#">Practitioner</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="news.html">News</a>
+                        <a class="nav-link" href="#">News</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
+                        <a class="nav-link" href="#">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <!-- notification-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Notifikacije
+                            @if(auth()->user()->unreadNotifications->count())
+                                <span class="badge" style="background-color: #d9534f; color:#fff;">
+                                            {{count(auth()->user()->unreadNotifications)}}
+                                        </span>
+                            @endif</a>
+                        <!-- notification body-->
+                        <div class="dropdown-menu" aria-labelledby="dropdown05">
+                            <h6><a class="dropdown-item " href="#" style="text-align: center;">NOTIFIKACIJE</a></h6>
+                            <a class="dropdown-item" href="#">
+
+                                @forelse(auth()->user()->unreadNotifications as $notification)
+                                    @include('layouts.notifications.'.snake_case(class_basename($notification->type)))
+                                @empty
+                                    <div class="list-group col-lg-12"
+                                         style="margin-bottom: 3px !important;">
+                                        <br><div class="d-flex w-100 justify-content-between" style="text-align: center;">
+                                            Nema novih obavijesti.
+                                        </div><br>
+                                    </div>
+                                @endforelse
+                            </a>
+
+                            <a class="dropdown-item" href="{{route('markRead')}}">Označi sve kao pročitano</a>
+                        </div>
                     </li>
                     @guest
                         <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Prijava') }}</a>

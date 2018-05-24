@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Claim;
+use App\Notifications\ConfirmedClaim;
+use App\Notifications\NewClaim;
 use App\Conversation;
 use App\Record;
 use App\User;
@@ -125,7 +127,14 @@ class ClaimController extends Controller
         $claim->user_id= Auth::user()->id;
         $claim->save();
 
-        return redirect('/')->with('success', 'Kreirano');
+
+
+        $users = User::where('users.blod_type','=', $claim->patient_blood)->where('users.type','=','darivatelj')->get();
+
+        foreach ($users as $user) {
+            $user->notify(new NewClaim($claim));
+        }
+        return redirect('/index')->with('success', 'Kreirano');
 
     }
 
@@ -144,6 +153,16 @@ class ClaimController extends Controller
         $conversation->userRequest_id=$claim->user->id;
         $conversation->donor_id=Auth::user()->id;
         $conversation->save();
+
+        $users = User::where('users.id','=', $claim->user_id)->where('users.type','=','trazitelj')->get();
+
+
+
+            foreach ($users as $user){
+                $user->notify(new ConfirmedClaim($record));
+            }
+
+
 
         return redirect()->back()->with('success', 'Potvrdili ste zahtjev.');
     }
