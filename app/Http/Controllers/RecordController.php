@@ -16,8 +16,6 @@ class RecordController extends Controller
      */
     public function index()
     {
-        $records = Record::orderby('id', 'desc')->get();
-        return view('record.index', ['records' => $records]);
     }
 
     /**
@@ -105,5 +103,10 @@ class RecordController extends Controller
         $record = Record::find($id);
         $record->delete();
         return redirect('/')->with('danger', 'Izbrisano.');
+    }
+
+    public function potvrde($id){
+        $records=Record::where('request_id','=',$id)->where('confirm','=',1)->get();
+        return view('record.index', ['records' => $records]);
     }
 }

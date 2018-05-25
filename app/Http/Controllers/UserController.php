@@ -58,10 +58,10 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $confirms = Record::where('user_id','=',Auth::user()->id)->where('confirm','=',1)->get();
-        $rejects=Record::where('user_id','=',Auth::user()->id)->where('confirm','=',0)->get();
-        $donates=Record::where('user_id','=',Auth::user()->id)->where('donor','=',1)->get();
-        $claims=Claim::where('user_id','=',Auth::user()->id)->get();
+        $confirms = Record::where('user_id','=',$id)->where('confirm','=',1)->get();
+        $rejects=Record::where('user_id','=',$id)->where('confirm','=',0)->get();
+        $donates=Record::where('user_id','=',$id)->where('donor','=',1)->get();
+        $claims=Claim::where('user_id','=',$id)->get();
         return view('user.show',array('user'=>$user,'confirms'=>$confirms,'rejects'=>$rejects,'donates'=>$donates,
             'claims'=>$claims));
     }

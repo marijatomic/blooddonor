@@ -49,7 +49,15 @@
         <div class="col-lg-3" style="margin-bottom:10px;">
             <div class="card" style="width: 18rem;">
                 <div class="card-header">
-                    {{$user->name}}
+                    <div class="row">
+                    <div class="col-lg-8">
+                        <h5>{{$user->name}}</h5>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="{{route('users_edit')}}/{{$user->id}}"
+                           class="btn btn-danger btn-xs">Uredi</a>
+                    </div>
+                    </div>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">{{$user->email}}</li>
@@ -62,143 +70,151 @@
                 </ul>
             </div>
         </div>
-        <div class="col-lg-9">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                @if($user->type=='darivatelj')
+        @if($user->type=='darivatelj')
+            <div class="col-lg-9">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                           aria-controls="home" aria-selected="true">Potvrdili</a>
+                           aria-controls="home" aria-selected="true">Potvrdio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                           aria-controls="profile" aria-selected="false">Odbili</a>
+                           aria-controls="profile" aria-selected="false">Odbio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                           aria-controls="contact" aria-selected="false">Donirali</a>
+                           aria-controls="contact" aria-selected="false">Donirao</a>
                     </li>
-                @elseif($user->type=='trazitelj')
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Ime pacijenta</th>
+                                <th scope="col">Datum rođenja pacijenta</th>
+                                <th scope="col">Adresa pacijenta</th>
+                                <th scope="col">Broj telefona pacijenta</th>
+                                <th scope="col">Krvna grupa pacijenta</th>
+                                <th scope="col">Spol pacijenta</th>
+                                <th scope="col">Opis</th>
+                                <th scope="col">Podnositelj zahtjeva</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($confirms as $confirm)
+                                <tr>
+                                    <th scope="row">{{$confirm->claim->id}}</th>
+                                    <td>{{$confirm->claim->patient_name}}</td>
+                                    <td>{{$confirm->claim->patient_birth}}</td>
+                                    <td>{{$confirm->claim->patient_address}}</td>
+                                    <td>{{$confirm->claim->patient_phone}}</td>
+                                    <td>{{$confirm->claim->patient_blood}}</td>
+                                    <td>{{$confirm->claim->patient_sex}}</td>
+                                    <td>{{$confirm->claim->description}}</td>
+                                    <td>{{$confirm->claim->user->name}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Ime pacijenta</th>
+                                <th scope="col">Datum rođenja pacijenta</th>
+                                <th scope="col">Adresa pacijenta</th>
+                                <th scope="col">Broj telefona pacijenta</th>
+                                <th scope="col">Krvna grupa pacijenta</th>
+                                <th scope="col">Spol pacijenta</th>
+                                <th scope="col">Opis</th>
+                                <th scope="col">Podnositelj zahtjeva</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($rejects as $reject)
+                                <tr>
+                                    <th scope="row">{{$reject->claim->id}}</th>
+                                    <td>{{$reject->claim->patient_name}}</td>
+                                    <td>{{$reject->claim->patient_birth}}</td>
+                                    <td>{{$reject->claim->patient_address}}</td>
+                                    <td>{{$reject->claim->patient_phone}}</td>
+                                    <td>{{$reject->claim->patient_blood}}</td>
+                                    <td>{{$reject->claim->patient_sex}}</td>
+                                    <td>{{$reject->claim->description}}</td>
+                                    <td>{{$reject->claim->user->name}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Ime pacijenta</th>
+                                <th scope="col">Datum rođenja pacijenta</th>
+                                <th scope="col">Adresa pacijenta</th>
+                                <th scope="col">Broj telefona pacijenta</th>
+                                <th scope="col">Krvna grupa pacijenta</th>
+                                <th scope="col">Spol pacijenta</th>
+                                <th scope="col">Opis</th>
+                                <th scope="col">Podnositelj zahtjeva</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($donates as $donate)
+                                <tr>
+                                    <th scope="row">{{$donate->claim->id}}</th>
+                                    <td>{{$donate->claim->patient_name}}</td>
+                                    <td>{{$donate->claim->patient_birth}}</td>
+                                    <td>{{$donate->claim->patient_address}}</td>
+                                    <td>{{$donate->claim->patient_phone}}</td>
+                                    <td>{{$donate->claim->patient_blood}}</td>
+                                    <td>{{$donate->claim->patient_sex}}</td>
+                                    <td>{{$donate->claim->description}}</td>
+                                    <td>{{$donate->claim->user->name}}</td>
+                                </tr>
+                            </tbody>
+                            @endforeach
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        @elseif($user->type=='trazitelj')
+            <div class="col-lg-9">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="zahtjevi-tab" data-toggle="tab" href="#zahtjevi" role="tab"
                            aria-controls="zahtjevi" aria-selected="true">Potvrdili</a>
                     </li>
-                @endif
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    @foreach($confirms as $confirm)
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Ime pacijenta</th>
-                                <th scope="col">Datum rođenja pacijenta</th>
-                                <th scope="col">Adresa pacijenta</th>
-                                <th scope="col">Broj telefona pacijenta</th>
-                                <th scope="col">Krvna grupa pacijenta</th>
-                                <th scope="col">Spol pacijenta</th>
-                                <th scope="col">Opis</th>
-                                <th scope="col">Podnositelj zahtjeva</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">{{$confirm->claim->id}}</th>
-                                <td>{{$confirm->claim->patient_name}}</td>
-                                <td>{{$confirm->claim->patient_birth}}</td>
-                                <td>{{$confirm->claim->patient_address}}</td>
-                                <td>{{$confirm->claim->patient_phone}}</td>
-                                <td>{{$confirm->claim->patient_blood}}</td>
-                                <td>{{$confirm->claim->patient_sex}}</td>
-                                <td>{{$confirm->claim->description}}</td>
-                                <td>{{$confirm->claim->user->name}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    @endforeach
-                </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    @foreach($rejects as $reject)
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Ime pacijenta</th>
-                                <th scope="col">Datum rođenja pacijenta</th>
-                                <th scope="col">Adresa pacijenta</th>
-                                <th scope="col">Broj telefona pacijenta</th>
-                                <th scope="col">Krvna grupa pacijenta</th>
-                                <th scope="col">Spol pacijenta</th>
-                                <th scope="col">Opis</th>
-                                <th scope="col">Podnositelj zahtjeva</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">{{$reject->claim->id}}</th>
-                                <td>{{$reject->claim->patient_name}}</td>
-                                <td>{{$reject->claim->patient_birth}}</td>
-                                <td>{{$reject->claim->patient_address}}</td>
-                                <td>{{$reject->claim->patient_phone}}</td>
-                                <td>{{$reject->claim->patient_blood}}</td>
-                                <td>{{$reject->claim->patient_sex}}</td>
-                                <td>{{$reject->claim->description}}</td>
-                                <td>{{$reject->claim->user->name}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    @endforeach
-                </div>
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    @foreach($donates as $donate)
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Ime pacijenta</th>
-                                <th scope="col">Datum rođenja pacijenta</th>
-                                <th scope="col">Adresa pacijenta</th>
-                                <th scope="col">Broj telefona pacijenta</th>
-                                <th scope="col">Krvna grupa pacijenta</th>
-                                <th scope="col">Spol pacijenta</th>
-                                <th scope="col">Opis</th>
-                                <th scope="col">Podnositelj zahtjeva</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">{{$donate->claim->id}}</th>
-                                <td>{{$donate->claim->patient_name}}</td>
-                                <td>{{$donate->claim->patient_birth}}</td>
-                                <td>{{$donate->claim->patient_address}}</td>
-                                <td>{{$donate->claim->patient_phone}}</td>
-                                <td>{{$donate->claim->patient_blood}}</td>
-                                <td>{{$donate->claim->patient_sex}}</td>
-                                <td>{{$donate->claim->description}}</td>
-                                <td>{{$donate->claim->user->name}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    @endforeach
-                </div>
+                </ul>
                 <div class="tab-pane fade show active" id="zahtjevi" role="tabpanel" aria-labelledby="zahtjevi-tab">
-                    @foreach($claims as $claim)
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Ime pacijenta</th>
-                                <th scope="col">Datum rođenja pacijenta</th>
-                                <th scope="col">Adresa pacijenta</th>
-                                <th scope="col">Broj telefona pacijenta</th>
-                                <th scope="col">Krvna grupa pacijenta</th>
-                                <th scope="col">Spol pacijenta</th>
-                                <th scope="col">Opis</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Ime pacijenta</th>
+                            <th scope="col">Datum rođenja pacijenta</th>
+                            <th scope="col">Adresa pacijenta</th>
+                            <th scope="col">Broj telefona pacijenta</th>
+                            <th scope="col">Krvna grupa pacijenta</th>
+                            <th scope="col">Spol pacijenta</th>
+                            <th scope="col">Opis</th>
+                            <th scope="col">Potvrde</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($claims as $claim)
                             <tr>
                                 <th scope="row">{{$claim->id}}</th>
                                 <td>{{$claim->patient_name}}</td>
@@ -208,15 +224,20 @@
                                 <td>{{$claim->patient_blood}}</td>
                                 <td>{{$claim->patient_sex}}</td>
                                 <td>{{$claim->description}}</td>
+                                <td><a href="{{route('records')}}/{{$claim->id}}"
+                                       class="btn btn-warning btn-xs">Potvrde</a></td>
                             </tr>
-                            </tbody>
-                        </table>
+                        @endforeach
+                        </tbody>
+                    </table>
 
-                    @endforeach
+
                 </div>
             </div>
-        </div>
+        @endif
     </div>
+
+</div>
 </div>
 
 
