@@ -453,7 +453,7 @@ header .navbar .dropdown-menu a {
 }
 
 .home-feature .one-col .btn-more:hover, .home-feature .two-col .btn-more:hover, .home-feature .three-col .btn-more:hover {
-  background: #6fcfdd;
+  background: #d9534f;
 }
 
 .home-feature .one-col:hover, .home-feature .two-col:hover, .home-feature .three-col:hover {

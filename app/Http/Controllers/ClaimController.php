@@ -134,7 +134,7 @@ class ClaimController extends Controller
         foreach ($users as $user) {
             $user->notify(new NewClaim($claim));
         }
-        return redirect('/index')->with('success', 'Kreirano');
+        return redirect('/')->with('success', 'Kreirano');
 
     }
 

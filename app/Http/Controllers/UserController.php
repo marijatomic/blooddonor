@@ -30,6 +30,12 @@ class UserController extends Controller
         return view('user.darivatelji', ['users' => $users]);
     }
 
+    public function osoblje()
+    {
+        $users = User::where('type','=','transfuziologija')->orderby('name', 'asc')->get();
+        return view('user.osoblje', ['users' => $users]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

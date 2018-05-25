@@ -34,16 +34,19 @@
                         <li><a href="#"><span class="fa fa-instagram"></span></a></li>
                     </ul>
                 </div>
-                <div class="col-md-6 col-sm-6 col-7 text-right">
-                    <p class="mb-0">
-                        <a href="#" class="cta-btn" data-toggle="modal" data-target="#modalAppointment">ZAHTJEV</a></p>
-                </div>
+                @if(Auth::user())
+                    <div class="col-md-6 col-sm-6 col-7 text-right">
+                        <p class="mb-0">
+                            <a href="#" class="cta-btn" data-toggle="modal" data-target="#modalAppointment">ZAHTJEV</a></p>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{{url('/index')}}">Blood Donor</a>
+            <a class="navbar-brand" href="{{ url('/') }}" style="padding-top: 0px !important; float: right;"><img
+                        src="{{ asset('assets1/img/logo.png') }}" alt="logo img" width="70px" height="70px;"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05"
                     aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,91 +57,65 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{url('/index')}}">Home</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">Usluge</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="#">Darivateji</a>
-                            <a class="dropdown-item" href="#">Osoblje</a>
-                        </div>
-
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Zahtjevi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
 
                     <!-- notification-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">Notifikacije
-                            @if(auth()->user()->unreadNotifications->count())
-                                <span class="badge" style="background-color: #d9534f; color:#fff;">
+                    @if (Auth::user())
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">Notifikacije
+                                @if(auth()->user()->unreadNotifications->count())
+                                    <span class="badge" style="background-color: #d9534f; color:#fff;">
                                             {{count(auth()->user()->unreadNotifications)}}
                                         </span>
-                            @endif</a>
-                        <!-- notification body-->
-                        <div class="dropdown-menu" aria-labelledby="dropdown05">
-                            <h6><a class="dropdown-item " href="#" style="text-align: center;">NOTIFIKACIJE</a></h6>
-                            <a class="dropdown-item" href="#">
+                                @endif</a>
+                            <!-- notification body-->
+                            <div class="dropdown-menu" aria-labelledby="dropdown05">
+                                <h6><a class="dropdown-item " href="#" style="text-align: center;">NOTIFIKACIJE</a></h6>
+                                <a class="dropdown-item" href="#">
 
-                                @forelse(auth()->user()->unreadNotifications as $notification)
-                                    @include('layouts.notifications.'.snake_case(class_basename($notification->type)))
-                                @empty
-                                    <div class="list-group col-lg-12"
-                                         style="margin-bottom: 3px !important;">
-                                        <br><div class="d-flex w-100 justify-content-between" style="text-align: center;">
-                                            Nema novih obavijesti.
-                                        </div><br>
-                                    </div>
-                                @endforelse
-                            </a>
+                                    @forelse(auth()->user()->unreadNotifications as $notification)
+                                        @include('layouts.notifications.'.snake_case(class_basename($notification->type)))
+                                    @empty
+                                        <div class="list-group col-lg-12"
+                                             style="margin-bottom: 3px !important;">
+                                            <br>
+                                            <div class="d-flex w-100 justify-content-between" style="text-align: center;">
+                                                Nema novih obavijesti.
+                                            </div>
+                                            <br>
+                                        </div>
+                                    @endforelse
+                                </a>
 
-                            <a class="dropdown-item" href="{{route('markRead')}}">Označi sve kao pročitano</a>
-                        </div>
-                    </li>
+                                <a class="dropdown-item" href="{{route('markRead')}}">Označi sve kao pročitano</a>
+                            </div>
+                        </li>
+                    @endif
+
                     @guest
                         <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Prijava') }}</a>
                         </li>
                         <li class="nav-item"><a class="nav-link"
                                                 href="{{ route('register') }}">{{ __('Registracija') }}</a></li>
                         @else
-                            <li class="dropdown nav-item">
-                                <a href="#" class="dropdown-toggle nav-link " data-toggle="dropdown" role="button"
-                                   aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu row nav-item" style="width:350px;">
-                                    <ol class="col-md-12">
-                                        <div class="col-sm-12" style="padding: 0px !important;">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->name }} <span
+                                            class="caret"></span></a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                    <a class="dropdown-item" href="{{route('users')}}/{{Auth::user()->id}}"><i class="fa fa-user-circle-o"></i> Profil</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i> Odjava</a>
+                                    <form id="logout-form" action="{{ route('logout') }}"
+                                          method="POST"
+                                          style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </div>
 
-
-                                            <div class="col-md-6"
-                                                 style="padding: 0px !important;">
-                                                <a href="{{ route('logout') }}"
-                                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"
-                                                   class="btn btn-default btn-block btn-lg"
-                                                ><i
-                                                            class="fa fa-power-off"></i>
-                                                    Odjavi se
-                                                </a>
-
-                                                <form id="logout-form" action="{{ route('logout') }}"
-                                                      method="POST"
-                                                      style="display: none;">
-                                                    {{ csrf_field() }}
-                                                </form>
-                                            </div>
-
-
-                                        </div>
-                                    </ol>
-                                </ul>
                             </li>
+
                             @endguest
                 </ul>
             </div>
@@ -147,21 +124,7 @@
 </header>
 <!-- END header -->
 
-<section class="home-slider inner-page owl-carousel">
-    <div class="slider-item" style="background-image: url('assets/img/slider-2.jpg')">
 
-        <div class="container">
-            <div class="row slider-text align-items-center">
-                <div class="col-md-7 col-sm-12 element-animate">
-                    <h1>PREGLED ZAHTJEVA ZA DONIRANJE KRVI</h1>
-                    <p></p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-</section>
 <!-- END slider -->
 
 
@@ -191,20 +154,25 @@
                          aria-labelledby="v-pills-home-tab">
                         <h2 class="lead" style="color: #D9534F">{{$claim->patient_name}}</h2>
                         <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Datum rođenja: <p class="lead">   {{$claim->patient_birth}}</p></p>
-                            <p class="col-md-6" style="color: #D9534F">Spol: </p> <p class="lead">   {{$claim->patient_sex}}</p>
+                            <p class="col-md-6" style="color: #D9534F">Datum rođenja:
+                            <p class="lead">   {{$claim->patient_birth}}</p></p>
+                            <p class="col-md-6" style="color: #D9534F">Spol: </p>
+                            <p class="lead">   {{$claim->patient_sex}}</p>
                         </div>
 
                         <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Adresa: <p class="lead">   {{$claim->patient_address}}</p></p>
-                            <p class="col-md-6" style="color: #D9534F">Broj telefona: </p> <p class="lead">   {{$claim->patient_phone}}</p>
+                            <p class="col-md-6" style="color: #D9534F">Adresa:
+                            <p class="lead">   {{$claim->patient_address}}</p></p>
+                            <p class="col-md-6" style="color: #D9534F">Broj telefona: </p>
+                            <p class="lead">   {{$claim->patient_phone}}</p>
                         </div>
 
                         <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Krvna grupa: <p class="lead">   {{$claim->patient_blood}}</p></p>
-                            <p class="col-md-6" style="color: #D9534F">Opis: </p> <p class="lead">   {{$claim->description}}</p>
+                            <p class="col-md-6" style="color: #D9534F">Krvna grupa:
+                            <p class="lead">   {{$claim->patient_blood}}</p></p>
+                            <p class="col-md-6" style="color: #D9534F">Opis: </p>
+                            <p class="lead">   {{$claim->description}}</p>
                         </div>
-
 
 
                     </div>
@@ -214,22 +182,29 @@
                         <h2 class="lead" style="color: #D9534F">{{$claim->user->name}}</h2>
 
                         <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Email: <p class="lead">  {{$claim->user->email}}</p></p>
+                            <p class="col-md-6" style="color: #D9534F">Email:
+                            <p class="lead">  {{$claim->user->email}}</p></p>
 
                         </div>
                         <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Datum rođenja: <p class="lead">  {{$claim->user->birth_date}}</p></p>
-                            <p class="col-md-6" style="color: #D9534F">Spol: </p> <p class="lead">   {{$claim->user->sex}}</p>
+                            <p class="col-md-6" style="color: #D9534F">Datum rođenja:
+                            <p class="lead">  {{$claim->user->birth_date}}</p></p>
+                            <p class="col-md-6" style="color: #D9534F">Spol: </p>
+                            <p class="lead">   {{$claim->user->sex}}</p>
                         </div>
 
                         <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Adresa: <p class="lead">   {{$claim->user->address}}</p></p>
-                            <p class="col-md-6" style="color: #D9534F">Broj telefona: </p> <p class="lead">   {{$claim->user->phone}}</p>
+                            <p class="col-md-6" style="color: #D9534F">Adresa:
+                            <p class="lead">   {{$claim->user->address}}</p></p>
+                            <p class="col-md-6" style="color: #D9534F">Broj telefona: </p>
+                            <p class="lead">   {{$claim->user->phone}}</p>
                         </div>
 
                         <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Krvna grupa: <p class="lead">   {{$claim->user->blod_type}}</p></p>
-                            <p class="col-md-6" style="color: #D9534F">Uloga: </p> <p class="lead">   {{$claim->user->type}}</p>
+                            <p class="col-md-6" style="color: #D9534F">Krvna grupa:
+                            <p class="lead">   {{$claim->user->blod_type}}</p></p>
+                            <p class="col-md-6" style="color: #D9534F">Uloga: </p>
+                            <p class="lead">   {{$claim->user->type}}</p>
                         </div>
 
                     </div>
@@ -237,19 +212,19 @@
                          aria-labelledby="v-pills-messages-tab">
                         <h2 class="lead" style="color: #D9534F">Potvrdili zahtjev</h2>
                         <div class="list-group row justify-content-center">
-
-                            @foreach($records as $record)
-                                @if($record->confirm == 1)
-                                    <a href=""
-                                       class="list-group-item list-group-item-action flex-column align-items-start "
-                                       style="background-color: transparent; border:none;">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5>{{$record->user->name}}</h5>
-                                        </div>
-                                    </a>
-                                @endif
-                            @endforeach
-
+                            @if(Auth::user())
+                                @foreach($records as $record)
+                                    @if($record->confirm == 1)
+                                        <a href=""
+                                           class="list-group-item list-group-item-action flex-column align-items-start "
+                                           style="background-color: transparent; border:none;">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5>{{$record->user->name}}</h5>
+                                            </div>
+                                        </a>
+                                    @endif
+                                @endforeach
+                            @endif
                         </div>
 
                     </div>
@@ -257,16 +232,19 @@
                          aria-labelledby="v-pills-settings-tab">
                         <h2 class="lead" style="color: #D9534F">Odbili zahtjev</h2>
                         <div class="list-group row justify-content-center">
-                            @foreach($records as $record)
-                                @if($record->confirm == 0)
-                                    <a href="#"
-                                       class="list-group-item list-group-item-action flex-column align-items-start ">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5>{{$record->user->name}}</h5>
-                                        </div>
-                                    </a>
-                                @endif
-                            @endforeach
+                            @if(Auth::user())
+                                @foreach($records as $record)
+                                    @if($record->confirm == 0)
+                                        <a href=""
+                                           class="list-group-item list-group-item-action flex-column align-items-start "
+                                           style="background-color: transparent; border:none;">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5>{{$record->user->name}}</h5>
+                                            </div>
+                                        </a>
+                                    @endif
+                                @endforeach
+                            @endif
 
                         </div>
 
@@ -275,35 +253,37 @@
             </div>
         </div>
         <div class="row">
-            @if($claim->user_id != Auth::user()->id)
-                @if($recordConfirm==false)
-                    <div class="row col-lg-5">
-                        <form class="form-horizontal"
-                              action="{{route('confirm')}}/{{$claim->id}}"
-                              method="POST">
-                            {{csrf_field()}}
-                            <fieldset >
-                                <button type="submit" class=" btn btn-danger btn-block">
-                                    Potvrdi
-                                </button>
-                            </fieldset>
-                        </form>
-                        <div class="col-lg-1"></div>
-                        <form class="form-horizontal"
-                              action="{{route('reject')}}/{{$claim->id}}"
-                              method="POST">
-                            {{csrf_field()}}
-                            <fieldset >
-                                <button type="submit" class="btn btn-danger btn-block"
-                                        >
-                                    Odbij
-                                </button>
-                            </fieldset>
-                        </form>
-                    </div>
+            @if(Auth::user())
+                @if($claim->user_id != Auth::user()->id)
+                    @if($recordConfirm==false)
+                        <div class="row col-lg-12" style="margin-top: 15px;">
+                            <form class="form-horizontal col-md-2"
+                                  action="{{route('confirm')}}/{{$claim->id}}"
+                                  method="POST">
+                                {{csrf_field()}}
+                                <fieldset>
+                                    <button type="submit" class=" btn btn-danger btn-block">
+                                        Potvrdi
+                                    </button>
+                                </fieldset>
+                            </form>
+                            <form class="form-horizontal col-md-2"
+                                  action="{{route('reject')}}/{{$claim->id}}"
+                                  method="POST">
+                                {{csrf_field()}}
+                                <fieldset>
+                                    <button type="submit" class="btn btn-danger btn-block"
+                                    >
+                                        Odbij
+                                    </button>
+                                </fieldset>
+                            </form>
+                        </div>
 
+                    @endif
                 @endif
             @endif
+
         </div>
     </div>
 
@@ -332,8 +312,6 @@
         </div>
     </div>
 </footer>
-<!-- END footer -->
-
 
 <!-- Modal -->
 <div class="modal fade" id="modalAppointment" tabindex="-1" role="dialog" aria-labelledby="modalAppointmentLabel"
@@ -341,43 +319,81 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalAppointmentLabel">Appointment</h5>
+                <h5 class="modal-title" id="modalAppointmentLabel">Ispunite zahtjev za donacije krvi </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#">
+                <form method="POST" action="{{ route('claim_ucreate') }}">
+                    @csrf
                     <div class="form-group">
-                        <label for="appointment_name" class="text-black">Full Name</label>
-                        <input type="text" class="form-control" id="appointment_name">
+                        <label for="appointment_name" class="text-black">Ime i prezime </label>
+                        <input type="text" class="form-control" id="appointment_name" name="patient_name"
+                               placeholder="Ime i prezime">
                     </div>
                     <div class="form-group">
-                        <label for="appointment_email" class="text-black">Email</label>
-                        <input type="text" class="form-control" id="appointment_email">
+                        <label for="appointment_name" class="text-black">Adresa pacijenta </label>
+                        <input type="text" class="form-control" id="appointment_name" name="patient_address"
+                               placeholder="Adresa">
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="appointment_date" class="text-black">Date</label>
-                                <input type="text" class="form-control" id="appointment_date">
+                                <label for="appointment_date" class="text-black">Broj telefona</label>
+                                <input type="text" class="form-control" id="appointment_name" name="patient_phone"
+                                       placeholder="Broj telefona">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="appointment_time" class="text-black">Time</label>
-                                <input type="text" class="form-control" id="appointment_time">
+                                <label for="appointment_date" class="text-black">Datum rođenja</label>
+                                <input type="text" class="form-control" id="appointment_date" name="patient_birth"
+                                       placeholder="Datum rođenja">
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="appointment_date" class="text-black">Krvna grupa</label>
+                                <select id="inlineFormCustomSelect" name="patient_blood" class="col-md-12">
+                                    <option selected>Odaberi krvnu grupu</option>
+                                    <option value="A+">A+</option>
+                                    <option value="B+">B+</option>
+                                    <option value="0+">0+</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B-">B-</option>
+                                    <option value="0-">0-</option>
+                                    <option value="AB-">AB-</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="appointment_date" class="text-black">Spol</label>
+                                <select id="inlineFormCustomSelect" name="patient_sex" class="col-md-12">
+                                    <option selected>Odaberi spol</option>
+                                    <option value="musko">Muško</option>
+                                    <option value="zensko">Žensko</option>
+
+                                </select>
                             </div>
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        <label for="appointment_message" class="text-black">Message</label>
-                        <textarea name="" id="appointment_message" class="form-control" cols="30" rows="10"></textarea>
+                        <label for="appointment_message" class="text-black">Opis</label>
+                        <textarea name="description" id="appointment_message" class="form-control" cols="30" rows="10"
+                                  placeholder="Opis"></textarea>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Send Message" class="btn btn-primary">
+                        <input type="submit" value="Pošalji zahtjev" class="btn btn-danger">
                     </div>
                 </form>
             </div>

@@ -11,15 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/index','LandPage1Controller@index');
+Route::get('/','LandPage1Controller@index');
 
 
 $routes = [
@@ -46,6 +43,7 @@ Route::get('index/claim/ucreate', 'ClaimController@userCreate')->name('claim_ucr
 Route::post('index/claim/ucreate', 'ClaimController@userStore');
 
 Route::get('/darivatelji', 'UserController@darivatelji')->name('darivatelji');
+Route::get('/osoblje', 'UserController@osoblje')->name('osoblje');
 
 
 Route::get('/claims', 'ClaimController@index')->name('claims');
