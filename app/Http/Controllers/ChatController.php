@@ -92,7 +92,7 @@ class ChatController extends Controller
     {
         /*$records=Record::where('user_id','=',Auth::user()->id)->first();
         $claims=Claim::where('user_id','=',Auth::user()->id)->first();*/
-        $conversations=Conversation::where('userRequest_id','=',Auth::user()->id)->orWhere('donor_id','=',Auth::user()->id)->get();
+        $conversations=Conversation::where('userRequest_id','=',Auth::user()->id)->orWhere('donor_id','=',Auth::user()->id)->orderBy('last_message_time', 'desc')->get();
 
 
         foreach ($conversations as $conversation) {
@@ -118,12 +118,12 @@ class ChatController extends Controller
         $message = new Message();
         $message->content = $request->content_msg;
         $message->conversation_id = $request->conversation_id;
-        $message->created_at = $request->created_at;
+//        $message->created_at = $request->created_at;
         $message->sender_id = Auth::user()->id;
         $message->save();
 
         $conversation = Conversation::find($request->conversation_id);
-        $conversation->last_message_time = $request->created_at;
+        $conversation->last_message_time = $message->created_at;
         $conversation->save();
 
         return self::getMessages($request->conversation_id);
