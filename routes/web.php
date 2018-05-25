@@ -20,8 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/index','LandPage1Controller@index');
-Route::get('/index1','LandPage2Controller@index');
-Route::get('/index2','LandPage3Controller@index');
+
 
 $routes = [
     'users' => 'UserController',];
@@ -46,7 +45,10 @@ foreach ($routes as $key => $value) {
 Route::get('index/claim/ucreate', 'ClaimController@userCreate')->name('claim_ucreate');
 Route::post('index/claim/ucreate', 'ClaimController@userStore');
 
-Route::get('/claims', 'ClaimControlle@index')->name('claims');
+Route::get('/darivatelji', 'UserController@darivatelji')->name('darivatelji');
+
+
+Route::get('/claims', 'ClaimController@index')->name('claims');
 Route::get('/claims/{id}','ClaimController@show')->where('id', '[0-9]+');
 
 
@@ -67,3 +69,15 @@ Route::get('/chat','ChatController@index');
 Route::get('/chat/conversations', 'ChatController@getConversations')->name('conversations1'); //vraća sve razgovore prijavljenog korisnika
 Route::get('/chat/messages/{conversation_id}', 'ChatController@getMessages')->name('messages');
 Route::post('/chat/messages', 'ChatController@createMessage')->name('create_message');
+
+//Ruta za nepročitane notifikacije
+Route::get('/markAsRead', function () {
+
+    auth()->user()->unreadNotifications->markAsRead();
+
+    return redirect()->back();
+
+})->name('markRead');
+
+
+

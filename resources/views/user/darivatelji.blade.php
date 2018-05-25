@@ -58,6 +58,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">Usluge</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <a class="dropdown-item" href="#">Zahtjevi</a>
                             <a class="dropdown-item" href="#">Darivateji</a>
                             <a class="dropdown-item" href="#">Osoblje</a>
                         </div>
@@ -65,12 +66,14 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Zahtjevi</a>
+                        <a class="nav-link" href="#">News</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
                     <!-- notification-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown"
@@ -147,14 +150,15 @@
 </header>
 <!-- END header -->
 
+
 <section class="home-slider inner-page owl-carousel">
-    <div class="slider-item" style="background-image: url('assets/img/slider-2.jpg')">
+    <div class="slider-item" style="background-image: url('assets1/img/slider-2.jpg');">
 
         <div class="container">
             <div class="row slider-text align-items-center">
                 <div class="col-md-7 col-sm-12 element-animate">
-                    <h1>PREGLED ZAHTJEVA ZA DONIRANJE KRVI</h1>
-                    <p></p>
+                    <h1>DARIVATELJI</h1>
+
                 </div>
             </div>
         </div>
@@ -165,152 +169,26 @@
 <!-- END slider -->
 
 
-<section class="section bg-light custom-tabs">
+<section class="section bg-light">
     <div class="container">
         <div class="row">
-
-            <div class="col-md-4 border-right element-animate" data-animate-effect="fadeInLeft">
-                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
-                       aria-controls="v-pills-home" aria-selected="true">1 PACIJENT</a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-                       aria-controls="v-pills-profile" aria-selected="false">2 ZAHTJEV PODNOSI </a>
-                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
-                       aria-controls="v-pills-messages" aria-selected="false">3 POTVRDILI</a>
-                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
-                       aria-controls="v-pills-settings" aria-selected="false">4 ODBILI</a>
-
-                </div>
-
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-7 element-animate" data-animate-effect="fadeInLeft">
-
-                <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
-                         aria-labelledby="v-pills-home-tab">
-                        <h2 class="lead" style="color: #D9534F">{{$claim->patient_name}}</h2>
-                        <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Datum rođenja: <p class="lead">   {{$claim->patient_birth}}</p></p>
-                            <p class="col-md-6" style="color: #D9534F">Spol: </p> <p class="lead">   {{$claim->patient_sex}}</p>
-                        </div>
-
-                        <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Adresa: <p class="lead">   {{$claim->patient_address}}</p></p>
-                            <p class="col-md-6" style="color: #D9534F">Broj telefona: </p> <p class="lead">   {{$claim->patient_phone}}</p>
-                        </div>
-
-                        <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Krvna grupa: <p class="lead">   {{$claim->patient_blood}}</p></p>
-                            <p class="col-md-6" style="color: #D9534F">Opis: </p> <p class="lead">   {{$claim->description}}</p>
-                        </div>
-
-
-
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
-                         aria-labelledby="v-pills-profile-tab">
-
-                        <h2 class="lead" style="color: #D9534F">{{$claim->user->name}}</h2>
-
-                        <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Email: <p class="lead">  {{$claim->user->email}}</p></p>
-
-                        </div>
-                        <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Datum rođenja: <p class="lead">  {{$claim->user->birth_date}}</p></p>
-                            <p class="col-md-6" style="color: #D9534F">Spol: </p> <p class="lead">   {{$claim->user->sex}}</p>
-                        </div>
-
-                        <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Adresa: <p class="lead">   {{$claim->user->address}}</p></p>
-                            <p class="col-md-6" style="color: #D9534F">Broj telefona: </p> <p class="lead">   {{$claim->user->phone}}</p>
-                        </div>
-
-                        <div class="row">
-                            <p class="col-md-6" style="color: #D9534F">Krvna grupa: <p class="lead">   {{$claim->user->blod_type}}</p></p>
-                            <p class="col-md-6" style="color: #D9534F">Uloga: </p> <p class="lead">   {{$claim->user->type}}</p>
-                        </div>
-
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
-                         aria-labelledby="v-pills-messages-tab">
-                        <h2 class="lead" style="color: #D9534F">Potvrdili zahtjev</h2>
-                        <div class="list-group row justify-content-center">
-
-                            @foreach($records as $record)
-                                @if($record->confirm == 1)
-                                    <a href=""
-                                       class="list-group-item list-group-item-action flex-column align-items-start "
-                                       style="background-color: transparent; border:none;">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5>{{$record->user->name}}</h5>
-                                        </div>
-                                    </a>
-                                @endif
-                            @endforeach
-
-                        </div>
-
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
-                         aria-labelledby="v-pills-settings-tab">
-                        <h2 class="lead" style="color: #D9534F">Odbili zahtjev</h2>
-                        <div class="list-group row justify-content-center">
-                            @foreach($records as $record)
-                                @if($record->confirm == 0)
-                                    <a href="#"
-                                       class="list-group-item list-group-item-action flex-column align-items-start ">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5>{{$record->user->name}}</h5>
-                                        </div>
-                                    </a>
-                                @endif
-                            @endforeach
-
-                        </div>
+            @foreach($users as $user)
+            <div class="col-md-3 element-animate">
+                <div class="media d-block media-custom text-center">
+                    <img src="{{asset('assets1/img/blood1.jpg')}}" alt="Image Placeholder" class="img-fluid">
+                    <div class="media-body">
+                        <a href="{{route('users')}}/{{$user->id}}"><h3 class="mt-0 text-black">{{$user->name}}</h3></a>
+                        <h4 class="mt-0 text-black">{{$user->blod_type}}</h4>
 
                     </div>
                 </div>
             </div>
+@endforeach
         </div>
-        <div class="row">
-            @if($claim->user_id != Auth::user()->id)
-                @if($recordConfirm==false)
-                    <div class="row col-lg-5">
-                        <form class="form-horizontal"
-                              action="{{route('confirm')}}/{{$claim->id}}"
-                              method="POST">
-                            {{csrf_field()}}
-                            <fieldset >
-                                <button type="submit" class=" btn btn-danger btn-block">
-                                    Potvrdi
-                                </button>
-                            </fieldset>
-                        </form>
-                        <div class="col-lg-1"></div>
-                        <form class="form-horizontal"
-                              action="{{route('reject')}}/{{$claim->id}}"
-                              method="POST">
-                            {{csrf_field()}}
-                            <fieldset >
-                                <button type="submit" class="btn btn-danger btn-block"
-                                        >
-                                    Odbij
-                                </button>
-                            </fieldset>
-                        </form>
-                    </div>
 
-                @endif
-            @endif
-        </div>
+
     </div>
-
-
 </section>
-<!-- END section -->
-
 
 
 <footer class="site-footer" role="contentinfo">
@@ -332,12 +210,10 @@
         </div>
     </div>
 </footer>
-<!-- END footer -->
 
 
 <!-- Modal -->
-<div class="modal fade" id="modalAppointment" tabindex="-1" role="dialog" aria-labelledby="modalAppointmentLabel"
-     aria-hidden="true">
+<div class="modal fade" id="modalAppointment" tabindex="-1" role="dialog" aria-labelledby="modalAppointmentLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

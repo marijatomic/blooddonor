@@ -16,7 +16,7 @@ class LandPage1Controller extends Controller
     {
 
 
-        $claims = Claim::orderBy('id', 'desc')->get();
+        $claims = Claim::orderBy('id', 'desc')->take(8)->get();
         return view('home1.index', ['claims' => $claims]);
 
 

@@ -24,6 +24,13 @@ class UserController extends Controller
         return view('user.index', ['users' => $users]);
     }
 
+    public function darivatelji()
+    {
+        $users = User::where('type','=','darivatelj')->orderby('name', 'asc')->get();
+        return view('user.darivatelji', ['users' => $users]);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
