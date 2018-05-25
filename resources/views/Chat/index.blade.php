@@ -38,32 +38,13 @@
                             </button>
                         </div>
                     </div>
-                    {{--<div class="dropdown all_conversation">--}}
-                        {{--<button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                            {{--<i class="fa fa-weixin" aria-hidden="true"></i>--}}
-                            {{--All Conversations--}}
-                            {{--<span class="caret pull-right"></span>--}}
-                        {{--</button>--}}
-                        {{--<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">--}}
-                            {{--<li><a href="#"> All Conversation </a>  <ul class="sub_menu_ list-unstyled">--}}
-                                    {{--<li><a href="#"> All Conversation </a> </li>--}}
-                                    {{--<li><a href="#">Another action</a></li>--}}
-                                    {{--<li><a href="#">Something else here</a></li>--}}
-                                    {{--<li><a href="#">Separated link</a></li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
-                            {{--<li><a href="#">Another action</a></li>--}}
-                            {{--<li><a href="#">Something else here</a></li>--}}
-                            {{--<li><a href="#">Separated link</a></li>--}}
-                        {{--</ul>--}}
-                    {{--</div>--}}
                     <div class="member_list" >
                         <ul class="list-unstyled">
                             <div ng-repeat="conv in conversations">
                             <li class="left clearfix" ng-click="selectConversation(conv)"
                                 ng-class="{'selected-conversation':conv.id == selectedConversation.id}">
                                 <span class="chat-img pull-left">
-                                    <img src="https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png" alt="User Avatar" class="img-circle">
+                                    <img src="{{asset('assetsChat\img\logo-blood-donor.png')}}" alt="User Avatar" class="img-circle">
                                 </span>
                                 <div class="chat-body clearfix" >
                                     <div class="header_sec">
@@ -96,28 +77,28 @@
                             </div></div>
                     </div><!--new_message_head-->
 
-                    <div class="chat_area">
+                    <div class="chat_area" id="message-content">
                         <div ng-repeat="msg in messages">
                         <ul class="list-unstyled" >
                             <li class="left clearfix admin_chat" ng-if="msg.sender_id == {{Auth::user()->id}}">
                                 <span class="chat-img1 pull-right">
-                                    <img src="https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png" alt="User Avatar" class="img-circle">
+                                    <img src="{{asset('assetsChat\img\logo-blood-donor.png')}}" alt="User Avatar" class="img-circle">
                                 </span>
                                 <div class="chat-body1 clearfix">
                                     {{--<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.</p>--}}
                                     <p><% msg.content %></p>
-                                    <div class="chat_time pull-right">09:40PM</div>
+                                    <div class="chat_time pull-right"><%msg.created_at%></div>
                                 </div>
                             </li>
                             <li class="left clearfix" ng-if="msg.sender_id != {{Auth::user()->id}}">
                                 <span class="chat-img1 pull-left">
-                                    <img src="https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png" alt="User Avatar" class="img-circle">
+                                    <img src="{{asset('assetsChat\img\logo-blood-donor.png')}}" alt="User Avatar" class="img-circle">
                                 </span>
                                 <div class="chat-body1 clearfix">
                                     {{--<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.</p>--}}
 
                                     <p><% msg.content %></p>
-                                    <div class="chat_time pull-right">09:40PM</div>
+                                    <div class="chat_time pull-right"><%msg.created_at%></div>
                                 </div>
                             </li>
 
@@ -162,7 +143,7 @@
                 }])
                 .controller("myCtrl", function ($scope, $http) {
                     var API_MESSAGES
-//                    var element = document.getElementById("message-content");
+                    var element = document.getElementById("message-content");
                     $scope.selectConversation = function (con) {
                         $scope.selectedConversation = con;
                         $scope.searchText1 = "";
@@ -173,10 +154,10 @@
                         // Ulazna točka aplikacije
 //                            $scope.getMessages();
                             $scope.getConversations();
-    //                        setInterval(function () {
-    //                            $scope.getConversations();
-    //                            $scope.getMessages();
-    //                        }, 3000);
+                            setInterval(function () {
+                                $scope.getConversations();
+                                $scope.getMessages();
+                            }, 3000);
                         console.log('pozvanInit')
                     };
 
@@ -191,9 +172,9 @@
                             // called asynchronously if an error occurs
                             // or server returns response with an error status.
                         });
-//                        setTimeout(function () {
-//                            element.scrollTop = element.scrollHeight;
-//                        }, 100)
+                        setTimeout(function () {
+                            element.scrollTop = element.scrollHeight;
+                        }, 100)
                     }
 
 
@@ -220,11 +201,10 @@
                         var month = parseInt(mdy[0]);
                         var day = parseInt(mdy[1]);
                         var year = parseInt(mdy[2]);
-                        var formattedDate = year + '/' + month + '/' + day + ' ' + time;
+                        var formattedDate = year + '-' + month + '-' + day + ' ' + time;
                         console.log($scope.selectedConversation.id);
                         $newMessage = {
-                            'content_msg': $scope.newMessage, 'conversation_id': $scope.selectedConversation.id,
-                            'created_at': formattedDate, 'update_at': formattedDate
+                            'content_msg': $scope.newMessage, 'conversation_id': $scope.selectedConversation.id
                         };
                         console.log($newMessage);
                         $http({
@@ -235,10 +215,10 @@
 
                             $scope.messages = response.data;
                             console.log($scope.messages);
-//                            $scope.getConversations();
-//                            setTimeout(function () {
-//                                element.scrollTop = element.scrollHeight;
-//                            }, 100)
+                            $scope.getConversations();
+                            setTimeout(function () {
+                                element.scrollTop = element.scrollHeight;
+                            }, 100)
                         }, function errorCallback(response) {
                             console.log("greška prilokom slanja poruke!")
                             if ($scope.newMessage == "") {
@@ -250,12 +230,14 @@
 
                         $scope.newMessage = "";
                     }
-                    {{--$scope.getUsers = function () {--}}
-                        {{--$http({--}}
-                                {{--method: 'GET',--}}
-                                {{--url: API_USERS--}}
-                            {{--}).then(function successCallback(response) {--}}
-                                {{--$scope.users = response.data;--}}
+
+
+                    $scope.getUsers = function () {
+                        $http({
+                                method: 'GET',
+                                url: API_USERS
+                            }).then(function successCallback(response) {
+                                $scope.users = response.data;
 
                                 {{--$scope.optionsList = response.data.filter(function (x) {--}}
                                     {{--if (x.id == {{Auth::user()->id}})--}}
@@ -265,11 +247,11 @@
                                 {{--})--}}
 
 
-                            {{--}, function errorCallback(response) {--}}
-                                {{--// called asynchronously if an error occurs--}}
-                                {{--// or server returns response with an error status.--}}
-                            {{--});--}}
-                        {{--}--}}
+                            }, function errorCallback(response) {
+                                // called asynchronously if an error occurs
+                                // or server returns response with an error status.
+                            });
+                        }
 
             });
         }) ();
