@@ -55,8 +55,14 @@
             <div class="collapse navbar-collapse" id="navbarsExample05">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{url('/index')}}">Home</a>
+                        <a class="nav-link active" href="{{url('/')}}">Home</a>
                     </li>
+
+                    @if(Auth::user())
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{route('chat')}}">Razgovori</a>
+                        </li>
+                    @endif
 
                     <!-- notification-->
                     @if (Auth::user())
