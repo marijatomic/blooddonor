@@ -1,8 +1,7 @@
-
 <!doctype html>
 <html lang="en" ng-app="bazinga">
 <head>
-    <title>Colorlib Medi+</title>
+    <title>Blood Donor</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -81,10 +80,12 @@
                                    aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->name }} <span
                                             class="caret"></span></a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                    <a class="dropdown-item" href="{{route('users')}}/{{Auth::user()->id}}"><i class="fa fa-user-circle-o"></i> Profil</a>
+                                    <a class="dropdown-item" href="{{route('users')}}/{{Auth::user()->id}}"><i
+                                                class="fa fa-user-circle-o"></i> Profil</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i> Odjava</a>
+                                                     document.getElementById('logout-form').submit();"><i
+                                                class="fa fa-power-off"></i> Odjava</a>
                                     <form id="logout-form" action="{{ route('logout') }}"
                                           method="POST"
                                           style="display: none;">
@@ -108,31 +109,33 @@
                 <div class="row justify-content-end">
                     <div id="custom-search-input" style="width: 100%;">
                         <div class="input-group col-lg-12">
-                            <input type="text" class="  search-query form-control" placeholder="Conversation" />
+                            <input type="text" class="  search-query form-control" placeholder="Conversation"/>
                             <button class="btn btn-danger" type="button">
                                 <span class=" glyphicon glyphicon-search"></span>
                             </button>
                         </div>
                     </div>
                     <div class="member_list" style="width: 100%;">
-                        <ul class="list-unstyled" >
+                        <ul class="list-unstyled">
                             <div ng-repeat="conv in conversations">
-                            <li class="left clearfix " ng-click="selectConversation(conv)"
-                                ng-class="{'selected-conversation':conv.id == selectedConversation.id}" style=" margin-bottom: 3px; border: solid #c9cad2 1px;" >
+                                <li class="left clearfix " ng-click="selectConversation(conv)"
+                                    ng-class="{'selected-conversation':conv.id == selectedConversation.id}"
+                                    style=" margin-bottom: 3px; border: solid #c9cad2 1px;">
                                 <span class="chat-img pull-left">
-                                    <img src="{{asset('assetsChat\img\logo-blood-donor.png')}}" alt="User Avatar" class="img-circle">
+                                    <img src="{{asset('assetsChat\img\logo-blood-donor.png')}}" alt="User Avatar"
+                                         class="img-circle">
                                 </span>
-                                <div class="chat-body clearfix" >
-                                    <div class="header_sec">
-                                        <strong class="primary-font"><%conv.title%></strong>
-                                        <span class="pull-right"> <% conv.last_message_time%></span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header_sec">
+                                            <strong class="primary-font"><%conv.title%></strong>
+                                            <span class="pull-right"> <% conv.last_message_time%></span>
+                                        </div>
+                                        <div class="contact_sec">
+                                            <strong class="primary-font"><%conv.message.content%></strong>
+                                            {{--<span class="badge pull-right">3</span>--}}
+                                        </div>
                                     </div>
-                                    <div class="contact_sec">
-                                        <strong class="primary-font"><%conv.message.content%></strong>
-                                        {{--<span class="badge pull-right">3</span>--}}
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
                             </div>
 
                         </ul>
@@ -148,37 +151,41 @@
                         <div class="pull-left">
                             <h4><%selectedConversation.title%></h4>
                         </div>
-                        <div class="pull-right">  <div class="dropdown">
+                        <div class="pull-right">
+                            <div class="dropdown">
 
-                            </div></div>
+                            </div>
+                        </div>
                     </div><!--new_message_head-->
 
                     <div class="chat_area" id="message-content">
                         <div ng-repeat="msg in messages">
-                        <ul class="list-unstyled" >
-                            <li class="left clearfix admin_chat" ng-if="msg.sender_id == {{Auth::user()->id}}">
+                            <ul class="list-unstyled">
+                                <li class="left clearfix admin_chat" ng-if="msg.sender_id == {{Auth::user()->id}}">
                                 <span class="chat-img1 pull-right">
-                                    <img src="{{asset('assetsChat\img\logo-blood-donor.png')}}" alt="User Avatar" class="img-circle">
+                                    <img src="{{asset('assetsChat\img\logo-blood-donor.png')}}" alt="User Avatar"
+                                         class="img-circle">
                                 </span>
-                                <div class="chat-body1 clearfix">
-                                    {{--<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.</p>--}}
-                                    <p style="color:#D9534F;"><% msg.content %></p>
-                                    <div class="chat_time pull-right"><span><%msg.created_at%></span></div>
-                                </div>
-                            </li>
-                            <li class="left clearfix" ng-if="msg.sender_id != {{Auth::user()->id}}">
+                                    <div class="chat-body1 clearfix">
+                                        {{--<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.</p>--}}
+                                        <p style="color:#D9534F;"><% msg.content %></p>
+                                        <div class="chat_time pull-right"><span><%msg.created_at%></span></div>
+                                    </div>
+                                </li>
+                                <li class="left clearfix" ng-if="msg.sender_id != {{Auth::user()->id}}">
                                 <span class="chat-img1 pull-left">
-                                    <img src="{{asset('assetsChat\img\logo-blood-donor.png')}}" alt="User Avatar" class="img-circle">
+                                    <img src="{{asset('assetsChat\img\logo-blood-donor.png')}}" alt="User Avatar"
+                                         class="img-circle">
                                 </span>
-                                <div class="chat-body1 clearfix">
-                                    {{--<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.</p>--}}
+                                    <div class="chat-body1 clearfix">
+                                        {{--<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.</p>--}}
 
-                                    <p  style="background-color: #d97971; color:white"><% msg.content %></p>
-                                    <div class="chat_time pull-right"><span><%msg.created_at%></span></div>
-                                </div>
-                            </li>
+                                        <p style="background-color: #d97971; color:white"><% msg.content %></p>
+                                        <div class="chat_time pull-right"><span><%msg.created_at%></span></div>
+                                    </div>
+                                </li>
 
-                        </ul>
+                            </ul>
                         </div>
                     </div><!--chat_area-->
                     <div class="message_write">
@@ -191,7 +198,8 @@
                         <div class="clearfix"></div>
                         <div class="chat_bottom">
 
-                            <button class="pull-right btn " ng-click="sendNewMessage()" style="background-color: #D9534F; color:white">
+                            <button class="pull-right btn " ng-click="sendNewMessage()"
+                                    style="background-color: #D9534F; color:white">
                                 Pošalji
                             </button>
                         </div>
@@ -264,11 +272,11 @@
                     $scope.init = function () {
                         // Ulazna točka aplikacije
 //                            $scope.getMessages();
+                        $scope.getConversations();
+                        setInterval(function () {
                             $scope.getConversations();
-                            setInterval(function () {
-                                $scope.getConversations();
-                                $scope.getMessages();
-                            }, 3000);
+                            $scope.getMessages();
+                        }, 3000);
                         console.log('pozvanInit')
                     };
 
@@ -345,26 +353,26 @@
 
                     $scope.getUsers = function () {
                         $http({
-                                method: 'GET',
-                                url: API_USERS
-                            }).then(function successCallback(response) {
-                                $scope.users = response.data;
+                            method: 'GET',
+                            url: API_USERS
+                        }).then(function successCallback(response) {
+                            $scope.users = response.data;
 
-                                {{--$scope.optionsList = response.data.filter(function (x) {--}}
-                                    {{--if (x.id == {{Auth::user()->id}})--}}
-                                        {{--return false;--}}
+                            {{--$scope.optionsList = response.data.filter(function (x) {--}}
+                            {{--if (x.id == {{Auth::user()->id}})--}}
+                            {{--return false;--}}
 
-                                    {{--return true;--}}
-                                {{--})--}}
+                            {{--return true;--}}
+                            {{--})--}}
 
 
-                            }, function errorCallback(response) {
-                                // called asynchronously if an error occurs
-                                // or server returns response with an error status.
-                            });
-                        }
+                        }, function errorCallback(response) {
+                            // called asynchronously if an error occurs
+                            // or server returns response with an error status.
+                        });
+                    }
 
-            });
-        }) ();
+                });
+        })();
     </script>
 
